@@ -47,20 +47,25 @@ function draw() {
   let x = 0;
   let y = 0;
 
-  // calculate pendulum
+  // translate to center of pendulum
   translate(225, 200);
+
+  // calculate amplitude
+  let amplitude = mainR * (4 / PI);
+
+  // set initial lengthg of X-axis (from center to one end)
+  let lengthXaxis = 0;
+
+  // calculate pendulum
   for (let i = 0; i < elements; i++) {
     let prevX = x;
     let prevY = y;
 
     let n = i * 2 + 1;
     let radius = mainR * (4 / (n * PI));
+    lengthXaxis += radius;
     x += radius * cos(n * time);
     y += radius * sin(n * time);
-
-    stroke(255, 100);
-    strokeWeight(1);
-    ellipse(prevX, prevY, radius * 2);
 
     stroke(255, 0, 0);
     strokeWeight(2);
@@ -68,6 +73,13 @@ function draw() {
   }
   path.unshift([x, y]);
   wave.unshift(y);
+
+  // draw initial circle and centerlines
+  stroke(255, 100);
+  strokeWeight(1);
+  ellipse(0, 0, amplitude * 2);
+  line(0, -amplitude - 5, 0, amplitude + 5);
+  line(-lengthXaxis - 5, 0, lengthXaxis + 5, 0);
 
   // draw path
   stroke(0, 255, 0);
@@ -99,7 +111,6 @@ function draw() {
   endShape();
 
   // draw box around wave
-  let amplitude = mainR * (4 / PI);
   let length = waveLength;
   stroke(255, 100);
   strokeWeight(1);
