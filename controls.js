@@ -82,13 +82,15 @@ function mousePressed() {
 }
 
 function setNumElements(value) {
+  if (elements === elementsMin && value < 0) return;
+  if (elements === elementsMax && value > 0) return;
   elements += value;
-  elements = constrain(elements, elementsMin, elementsMax)
   reset();
 }
 
 function setLevelOfDetail(value) {
+  if (detail === detailMin && value < 0) return;
+  if (detail === detailMax && value > 0) return;
   detail += value;
-  detail = constrain(detail, detailMin, detailMax)
   reset();
 }

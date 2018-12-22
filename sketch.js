@@ -34,6 +34,9 @@ function setup() {
 
   // set drawing defaults
   textAlign(CENTER, CENTER);
+
+  // reset
+  reset();
 }
 
 function draw() {
