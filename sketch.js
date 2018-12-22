@@ -21,6 +21,13 @@ let detailMax = 360; // max level of detail
 let detailMin = 30; // min level of detail
 let detailStep = 30; // ncrease/decrease level of detail by this amount
 
+// reset
+function reset() {
+  wave = [];
+  path = [];
+  time = 0;
+}
+
 function setup() {
   // create the world
   createCanvas(windowWidth, windowHeight);
