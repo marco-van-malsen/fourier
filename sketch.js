@@ -9,7 +9,7 @@ let mainR = 75; // radius of initial circle
 let path = []; // actual path created by pendulum
 let time = 0; // start at 0 degrees
 let wave = []; // combined sine wave created by pendulum
-let waveLength = 240; // maximum length of wave
+let waveLength = 360; // maximum length of wave
 
 let elements = 2; // number of elements
 let elementsMax = 10; // max number of elements
