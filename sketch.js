@@ -5,38 +5,65 @@
 
 // Extended by : Marco van Malsen
 
-let time = 0;
-let wave = [];
-let path = [];
+let mainR = 75; // rakius of initial circle
+let path = []; // actual path created by pendulum
+let time = 0; // start at 0 degrees
+let wave = []; // combined sine wave created by pendulum
+let waveLength = 240; // maximum length of wave
 
-let slider;
+let elements = 2; // number of elements
+let elementsMax = 10; // max number of elements
+let elementsMin = 1; // min number of elements
+let elementsStep = 1; // increase/decrease number of elements by this amount
+
+let detail = 180; // level of detail at number per 360 degrees
+let detailMax = 360; // max level of detail
+let detailMin = 30; // min level of detail
+let detailStep = 30; // ncrease/decrease level of detail by this amount
 
 function setup() {
-  createCanvas(725, 400);
-  slider = createSlider(1, 10, 5);
-  noFill();
+  // create the world
+  createCanvas(windowWidth, windowHeight);
+
+  // set drawing defaults
+  textAlign(CENTER, CENTER);
 }
 
 function draw() {
+  // let the world be a very dark place
   background(0);
-  translate(225, 200);
 
+  // create and draw controls
+  controls = [];
+  createControlSet(225, 45, 90, 30, elements, elementsMin, elementsMax, elementsStep, setNumElements);
+  createControlSet(225 + 225 + 0.5 * waveLength, 45, 90, 30, detail, detailMin, detailMax, detailStep, setLevelOfDetail);
+  for (let c of controls) c.show();
+  fill(255);
+  text('# of Elements', 225, 20);
+  text('Level of Detail', 225 + 225 + 0.5 * waveLength, 20);
+  noFill();
+
+  // reset pendulum's position
   let x = 0;
   let y = 0;
 
-  for (let i = 0; i < slider.value(); i++) {
+  // calculate pendulum
+  translate(225, 200);
+  for (let i = 0; i < elements; i++) {
     let prevX = x;
     let prevY = y;
 
     let n = i * 2 + 1;
-    let radius = 75 * (4 / (n * PI));
+    let radius = mainR * (4 / (n * PI));
     x += radius * cos(n * time);
     y += radius * sin(n * time);
 
     stroke(255, 100);
+    strokeWeight(1);
     ellipse(prevX, prevY, radius * 2);
 
     stroke(255, 0, 0);
+    strokeWeight(2);
     line(prevX, prevY, x, y);
   }
   path.unshift([x, y]);
@@ -44,6 +71,7 @@ function draw() {
 
   // draw path
   stroke(0, 255, 0);
+  strokeWeight(2);
   beginShape();
   for (let p = 0; p < path.length - 1; p++) {
     let point = path[p];
@@ -52,17 +80,18 @@ function draw() {
   endShape();
 
   // remove extra elements
-  if (path.length > 125) {
-    path.pop();
-  }
+  for (let p = path.length; p > detail; p--) path.pop();
+  for (let w = wave.length; w > waveLength; w--) wave.pop();
 
-  // draw connector
+  // draw line between pendulum and wave
   translate(225, 0);
   stroke(255, 100);
+  strokeWeight(1);
   line(x - 225, y, 0, wave[0]);
 
   // draw wave
   stroke(0, 255, 0);
+  strokeWeight(2);
   beginShape();
   noFill();
   for (let i = 0; i < wave.length; i++) {
@@ -70,16 +99,17 @@ function draw() {
   }
   endShape();
 
-  // remove extra elements
-  let amplitude = 75 * (4 / PI);
-  let length = 250;
+  // draw box around wave
+  let amplitude = mainR * (4 / PI);
+  let length = waveLength;
   stroke(255, 100);
-  rect(0, -amplitude, length, amplitude * 2)
-  stroke(0, 255, 0);
-  if (wave.length > 250) {
-    wave.pop();
-  }
+  strokeWeight(1);
+  line(-5, -amplitude, waveLength + 5, -amplitude);
+  line(-5, 0, waveLength + 5, 0);
+  line(-5, amplitude, waveLength + 5, amplitude);
+  line(0, -amplitude - 5, 0, amplitude + 5);
+  line(waveLength, -amplitude - 5, waveLength, amplitude + 5);
 
   // next please
-  time += 0.05;
+  time += TWO_PI / detail;
 }
