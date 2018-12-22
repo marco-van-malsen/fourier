@@ -84,9 +84,13 @@ function mousePressed() {
 function setNumElements(value) {
   elements += value;
   elements = constrain(elements, elementsMin, elementsMax)
+  wave = [];
+  path = [];
 }
 
 function setLevelOfDetail(value) {
   detail += value;
   detail = constrain(detail, detailMin, detailMax)
+  wave = [];
+  path = [];
 }
