@@ -5,7 +5,7 @@
 
 // Extended by : Marco van Malsen
 
-let mainR = 75; // rakius of initial circle
+let mainR = 75; // radius of initial circle
 let path = []; // actual path created by pendulum
 let time = 0; // start at 0 degrees
 let wave = []; // combined sine wave created by pendulum
@@ -93,7 +93,6 @@ function draw() {
   stroke(0, 255, 0);
   strokeWeight(2);
   beginShape();
-  noFill();
   for (let i = 0; i < wave.length; i++) {
     vertex(i, wave[i]);
   }
@@ -104,11 +103,11 @@ function draw() {
   let length = waveLength;
   stroke(255, 100);
   strokeWeight(1);
-  line(-5, -amplitude, waveLength + 5, -amplitude);
-  line(-5, 0, waveLength + 5, 0);
-  line(-5, amplitude, waveLength + 5, amplitude);
-  line(0, -amplitude - 5, 0, amplitude + 5);
-  line(waveLength, -amplitude - 5, waveLength, amplitude + 5);
+  line(-5, -amplitude, waveLength + 5, -amplitude); // top edge
+  line(-5, 0, waveLength + 5, 0); // center line
+  line(-5, amplitude, waveLength + 5, amplitude); // bottom edge
+  line(0, -amplitude - 5, 0, amplitude + 5); // left edge
+  line(waveLength, -amplitude - 5, waveLength, amplitude + 5); // right edge
 
   // next please
   time += TWO_PI / detail;
