@@ -36,7 +36,8 @@ class Control {
     // draw text
     fill(255);
     noStroke();
-    text(this.val, this.x + this.w * 0.5, this.y + this.h * 0.5);
+    let val2Show = (this.fnc && this.val > 0 ? "+" + this.val : this.val); // prefix the plus sign if needed
+    text(val2Show, this.x + this.w * 0.5, this.y + this.h * 0.5);
     noFill();
   }
 }
