@@ -9,17 +9,17 @@ let mainR = 75; // radius of initial circle
 let path = []; // actual path created by pendulum
 let time = 0; // start at 0 degrees
 let wave = []; // combined sine wave created by pendulum
-let waveLength = 360; // maximum length of wave
+let waveLength = 360; // maximum length of wave that will be shown
 
-let elements = 2; // number of elements
-let elementsMax = 10; // max number of elements
-let elementsMin = 1; // min number of elements
-let elementsStep = 1; // increase/decrease number of elements by this amount
+let elements = 3; // number of segments
+let elementsMax = 10; // maximum number of segments
+let elementsMin = 1; // minimum number of segments
+let elementsStep = 1; // increase/decrease number of segments by this amount
 
-let detail = 180; // level of detail at number per 360 degrees
-let detailMax = 360; // max level of detail
-let detailMin = 30; // min level of detail
-let detailStep = 30; // ncrease/decrease level of detail by this amount
+let detail = 180; // level of detail per cycle
+let detailMax = 360; // maximum level of detail
+let detailMin = 30; // minimum level of detail
+let detailStep = 30; // increase/decrease level of detail by this amount
 
 // reset
 function reset() {
@@ -75,26 +75,35 @@ function draw() {
   // calculate amplitude
   let amplitude = mainR * (4 / PI);
 
-  // set initial lengthg of X-axis (from center to one end)
+  // set initial length of X-axis (from center to one end)
   let lengthXaxis = 0;
 
-  // calculate pendulum
+  // calculate and draw pendulum
   for (let i = 0; i < elements; i++) {
+    // calculate next segment
     let prevX = x;
     let prevY = y;
-
     let n = i * 2 + 1;
     let radius = mainR * (4 / (n * PI));
-    lengthXaxis += radius;
     x += radius * cos(n * time);
     y += radius * sin(n * time);
 
+    // update X-axis
+    lengthXaxis += radius;
+    
+    // draw segment
     stroke(255, 0, 0);
     strokeWeight(2);
     line(prevX, prevY, x, y);
   }
+  
+  // update path and wave
   path.unshift([x, y]);
   wave.unshift(y);
+
+  // remove extra elements
+  path.splice(detail, path.length - detail);
+  wave.splice(waveLength, wave.length - waveLength);
 
   // draw initial circle and centerlines
   stroke(255, 100);
@@ -112,10 +121,6 @@ function draw() {
     vertex(point[0], point[1]);
   }
   endShape();
-
-  // remove extra elements
-  path.splice(detail, path.length - detail);
-  wave.splice(waveLength, wave.length - waveLength);
 
   // draw line between pendulum and wave
   translate(225, 0);
