@@ -34,6 +34,7 @@ function setup() {
 
   // set drawing defaults
   textAlign(CENTER, CENTER);
+  textSize(14);
 
   // reset
   reset();
@@ -43,15 +44,26 @@ function draw() {
   // let the world be a very dark place
   background(0);
 
-  // create and draw controls
+  // initialize controls
   controls = [];
-  createControlSet(225, 45, 90, 30, elements, elementsMin, elementsMax, elementsStep, setNumElements);
-  createControlSet(225 + 225 + 0.5 * waveLength, 45, 90, 30, detail, detailMin, detailMax, detailStep, setLevelOfDetail);
-  for (let c of controls) c.show();
+  let controlH = 40;
+  let controlW = 3 * controlH;
+  let controlX = 225;
+  let controlY = 50;
+
+  // initialize controls for 'No. of Elements"
   fill(255);
-  text('# of Elements', 225, 20);
-  text('Level of Detail', 225 + 225 + 0.5 * waveLength, 20);
+  text('No. of Elements', controlX, controlH - 0.5 * controlH);
+  createControlSet(controlX, controlY, controlW, controlH, elements, elementsMin, elementsMax, elementsStep, setNumElements);
+
+  // initialize controls for 'Level of Detail'
+  controlX += 225 + 0.5 * waveLength;
+  text('Level of Detail', controlX, controlH - 0.5 * controlH);
+  createControlSet(controlX, controlY, controlW, controlH, detail, detailMin, detailMax, detailStep, setLevelOfDetail);
+
+  // draw controls
   noFill();
+  for (let c of controls) c.show();
 
   // reset pendulum's position
   let x = 0;
