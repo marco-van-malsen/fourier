@@ -102,7 +102,7 @@ function draw() {
   wave.unshift(y);
 
   // remove extra segments
-  path.splice(detail, path.length - detail);
+  path.splice(detail + 1, path.length - detail);
   wave.splice(waveLength, wave.length - waveLength);
 
   // draw initial circle and centerlines
