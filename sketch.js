@@ -102,8 +102,8 @@ function draw() {
   endShape();
 
   // remove extra elements
-  for (let p = path.length; p > detail; p--) path.pop();
-  for (let w = wave.length; w > waveLength; w--) wave.pop();
+  path.splice(detail, path.length - detail);
+  wave.splice(waveLength, wave.length - waveLength);
 
   // draw line between pendulum and wave
   translate(225, 0);
