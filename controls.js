@@ -31,7 +31,27 @@ class Control {
     // draw rectangle
     stroke(127);
     strokeWeight(1);
-    rect(this.x, this.y, this.w, this.h);
+
+    // current value
+    if (!this.fnc) {
+      rect(this.x, this.y, this.w, this.h);
+    } else {
+      // decrease value
+      if (this.val < 0) {
+        beginShape();
+        vertex(this.x, this.y + 0.5 * this.w);
+        vertex(this.x + 0.5 * this.w, this.y + this.w);
+        vertex(this.x + this.w, this.y + 0.5 * this.w);
+        endShape()
+        // increase value
+      } else if (this.val > 0) {
+        beginShape();
+        vertex(this.x + this.w, this.y + 0.5 * this.w);
+        vertex(this.x + 0.5 * this.w, this.y);
+        vertex(this.x, this.y + 0.5 * this.w);
+        endShape()
+      }
+    }
 
     // draw text
     fill(255);
