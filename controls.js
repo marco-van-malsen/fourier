@@ -29,7 +29,7 @@ class Control {
   // draw the control
   show() {
     // draw rectangle
-    stroke(255, 100);
+    stroke(127);
     strokeWeight(1);
     rect(this.x, this.y, this.w, this.h);
 

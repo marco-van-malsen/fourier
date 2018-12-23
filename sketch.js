@@ -106,7 +106,7 @@ function draw() {
   wave.splice(waveLength, wave.length - waveLength);
 
   // draw initial circle and centerlines
-  stroke(255, 100);
+  stroke(127);
   strokeWeight(1);
   ellipse(0, 0, amplitude * 2);
   line(0, -amplitude - 5, 0, amplitude + 5);
@@ -124,7 +124,7 @@ function draw() {
 
   // draw line between pendulum and wave
   translate(225, 0);
-  stroke(255, 100);
+  stroke(127);
   strokeWeight(1);
   line(x - 225, y, 0, wave[0]);
 
@@ -138,7 +138,7 @@ function draw() {
   endShape();
 
   // draw box around wave
-  stroke(255, 100);
+  stroke(127);
   strokeWeight(1);
   line(-5, -amplitude, waveLength + 5, -amplitude); // top edge
   line(-5, 0, waveLength + 5, 0); // center line
