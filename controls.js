@@ -28,6 +28,18 @@ class Control {
 
   // draw the control
   show() {
+    // disable control
+    let enabled = true;
+    if (this.fnc) {
+      if (this.val === -1 * segmentsStep && segments === segmentsMin) enabled = false;
+      if (this.val === -1 * detailStep && detail === detailMin) enabled = false;
+      if (this.val === segmentsStep && segments === segmentsMax) enabled = false;
+      if (this.val === detailStep && detail === detailMax) enabled = false;
+    }
+
+    // only continue if control is enabled
+    if (!enabled) return;
+
     // draw rectangle
     stroke(127);
     strokeWeight(1);
