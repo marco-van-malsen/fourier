@@ -131,6 +131,7 @@ function draw() {
   // draw wave
   stroke(0, 255, 0);
   strokeWeight(2);
+  ellipse(0, wave[0], 4);
   beginShape();
   for (let i = 0; i < wave.length; i++) {
     vertex(i, wave[i]);
