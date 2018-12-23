@@ -128,6 +128,15 @@ function draw() {
   strokeWeight(1);
   line(x - 225, y, 0, wave[0]);
 
+  // draw box around wave
+  stroke(127);
+  strokeWeight(1);
+  line(-5, -amplitude, waveLength + 5, -amplitude); // top edge
+  line(-5, 0, waveLength + 5, 0); // center line
+  line(-5, amplitude, waveLength + 5, amplitude); // bottom edge
+  line(0, -amplitude - 5, 0, amplitude + 5); // left edge
+  line(waveLength, -amplitude - 5, waveLength, amplitude + 5); // right edge
+
   // draw wave
   stroke(0, 255, 0);
   strokeWeight(2);
@@ -137,15 +146,6 @@ function draw() {
     vertex(i, wave[i]);
   }
   endShape();
-
-  // draw box around wave
-  stroke(127);
-  strokeWeight(1);
-  line(-5, -amplitude, waveLength + 5, -amplitude); // top edge
-  line(-5, 0, waveLength + 5, 0); // center line
-  line(-5, amplitude, waveLength + 5, amplitude); // bottom edge
-  line(0, -amplitude - 5, 0, amplitude + 5); // left edge
-  line(waveLength, -amplitude - 5, waveLength, amplitude + 5); // right edge
 
   // next please
   time += TWO_PI / detail;
