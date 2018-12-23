@@ -60,9 +60,9 @@ function createControlSet(x, y, w, h, cur, min, max, stp, fnc) {
   control = new Control(controlX, controlY, controlW, h, -stp, min, max, fnc);
   controls.push(control);
 
-  // control to decrease value
+  // control to show current value (do not assign a function to execute !)
   controlX += controlW;
-  control = new Control(controlX, controlY, controlW, h, cur, min, max, fnc);
+  control = new Control(controlX, controlY, controlW, h, cur, min, max);
   controls.push(control);
 
   // control to increase value
