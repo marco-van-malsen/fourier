@@ -121,7 +121,6 @@ function draw() {
   endShape();
 
   // draw box around wave
-  let length = waveLength;
   stroke(255, 100);
   strokeWeight(1);
   line(-5, -amplitude, waveLength + 5, -amplitude); // top edge
