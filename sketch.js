@@ -53,6 +53,7 @@ function draw() {
 
   // initialize controls for 'No. of Segments"
   fill(255);
+  noStroke();
   text('No. of Segments', controlX, controlH - 0.5 * controlH);
   createControlSet(controlX, controlY, controlW, controlH, segments, segmentsMin, segmentsMax, segmentsStep, setNumSegments);
 
