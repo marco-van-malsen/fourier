@@ -63,7 +63,7 @@ function createControlSet(x, y, w, h, cur, min, max, stp, fnc) {
 
   // control to show current value
   controlX += controlW;
-  control = new Control(controlX, controlY, controlW, h, cur, min, max, doNothing);
+  control = new Control(controlX, controlY, controlW, h, cur, min, max);
   controls.push(control);
 
   // control to increase value
@@ -76,15 +76,8 @@ function createControlSet(x, y, w, h, cur, min, max, stp, fnc) {
 function mousePressed() {
   // check if control element was pressed; then execute the associated function
   for (let c of controls) {
-    if (c.isClicked(mouseX, mouseY)) {
-      c.fnc(c.val);
-    }
+    if (c.isClicked(mouseX, mouseY) && c.fnc) c.fnc(c.val);
   }
-}
-
-// function assigned to controls witout a function
-function doNothing() {
-  return;
 }
 
 function setNumSegments(value) {
