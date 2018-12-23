@@ -11,10 +11,10 @@ let time = 0; // start at 0 degrees
 let wave = []; // combined sine wave created by pendulum
 let waveLength = 360; // maximum length of wave that will be shown
 
-let elements = 3; // number of segments
-let elementsMax = 10; // maximum number of segments
-let elementsMin = 1; // minimum number of segments
-let elementsStep = 1; // increase/decrease number of segments by this amount
+let segments = 3; // number of segments
+let segmentsMax = 10; // maximum number of segments
+let segmentsMin = 1; // minimum number of segments
+let segmentsStep = 1; // increase/decrease number of segments by this amount
 
 let detail = 180; // level of detail per cycle
 let detailMax = 360; // maximum level of detail
@@ -51,10 +51,10 @@ function draw() {
   let controlX = 225;
   let controlY = 50;
 
-  // initialize controls for 'No. of Elements"
+  // initialize controls for 'No. of Segments"
   fill(255);
-  text('No. of Elements', controlX, controlH - 0.5 * controlH);
-  createControlSet(controlX, controlY, controlW, controlH, elements, elementsMin, elementsMax, elementsStep, setNumElements);
+  text('No. of Segments', controlX, controlH - 0.5 * controlH);
+  createControlSet(controlX, controlY, controlW, controlH, segments, segmentsMin, segmentsMax, segmentsStep, setNumSegments);
 
   // initialize controls for 'Level of Detail'
   controlX += 225 + 0.5 * waveLength;
@@ -79,7 +79,7 @@ function draw() {
   let lengthXaxis = 0;
 
   // calculate and draw pendulum
-  for (let i = 0; i < elements; i++) {
+  for (let i = 0; i < segments; i++) {
     // calculate next segment
     let prevX = x;
     let prevY = y;
@@ -90,18 +90,18 @@ function draw() {
 
     // update X-axis
     lengthXaxis += radius;
-    
+
     // draw segment
     stroke(255, 0, 0);
     strokeWeight(2);
     line(prevX, prevY, x, y);
   }
-  
+
   // update path and wave
   path.unshift([x, y]);
   wave.unshift(y);
 
-  // remove extra elements
+  // remove extra segments
   path.splice(detail, path.length - detail);
   wave.splice(waveLength, wave.length - waveLength);
 

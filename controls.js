@@ -82,10 +82,10 @@ function mousePressed() {
   }
 }
 
-function setNumElements(value) {
-  if (elements === elementsMin && value < 0) return;
-  if (elements === elementsMax && value > 0) return;
-  elements += value;
+function setNumSegments(value) {
+  if (segments === segmentsMin && value < 0) return;
+  if (segments === segmentsMax && value > 0) return;
+  segments += value;
   reset();
 }
 
